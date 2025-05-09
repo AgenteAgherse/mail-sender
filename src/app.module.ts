@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailService } from './mail/mail.service';
 import { MailController } from './mail/mail.controller';
+import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { MailController } from './mail/mail.controller';
       }),
       inject: [ConfigService],
     }),
+    CoreModule,
   ],
   controllers: [MailController],
   providers: [MailService],

@@ -1,9 +1,13 @@
 import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/core/prisma/prisma.service';
 
 @Injectable()
 export class MailService {
-  constructor(private readonly mailerService: MailerService) {}
+  constructor(
+    private readonly mailerService: MailerService,
+    private readonly prismaService: PrismaService,
+  ) {}
 
   async sendEmail(to: string, subject: string, body: string) {
     return this.mailerService.sendMail({
@@ -14,6 +18,10 @@ export class MailService {
   }
 
   async registerEmail(email: string) {
-    Logger.debug(email);
+    return await this.prismaService.mails.create({
+      data: {
+        email: email,
+      },
+    });
   }
 }

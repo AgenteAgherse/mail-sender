@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { MailService } from './mail.service';
 
 @Controller('mail')
@@ -11,9 +11,8 @@ export class MailController {
     return { success: true, message: 'Correo enviado correctamente' };
   }
 
-  @Get('register')
+  @Post('register')
   async register(@Body() body: { mail: string }) {
-    await this.mailService.registerEmail(body.mail);
-    return { success: true, message: 'Correo registrado correctamente' };
+    return await this.mailService.registerEmail(body.mail);
   }
 }
