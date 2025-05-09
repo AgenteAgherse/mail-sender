@@ -1,5 +1,5 @@
 import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()
 export class MailService {
@@ -11,5 +11,9 @@ export class MailService {
       subject,
       text: body,
     });
+  }
+
+  async registerEmail(email: string) {
+    Logger.debug(email);
   }
 }
